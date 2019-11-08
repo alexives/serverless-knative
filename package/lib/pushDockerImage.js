@@ -9,6 +9,7 @@ function pushDockerImage(funcName) {
   const name = getFuncName(service, funcName)
   const { username } = this.serverless.service.provider.docker
   const { password } = this.serverless.service.provider.docker
+  const { registryAddress } = this.serverless.service.provider.docker
   const credentials = {
     docker: {
       username,
@@ -26,7 +27,8 @@ function pushDockerImage(funcName) {
 
   const inputs = {
     repository,
-    tag
+    tag,
+    registryAddress
   }
 
   this.serverless.cli.log(`Pushing "${repository}:${tag}" to Container Registry...`)
